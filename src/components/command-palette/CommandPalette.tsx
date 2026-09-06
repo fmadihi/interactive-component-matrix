@@ -127,7 +127,7 @@ export function CommandPalette() {
         entry.item.run();
         // اینجا setOpen(false) اجرا نمی‌شود چون در شرط نیست
       } else {
-        entry.item.run();
+        //entry.item.run();
         setOpen(false); // فقط برای اکشن‌های دیگر بسته شود
       }
     } else {
