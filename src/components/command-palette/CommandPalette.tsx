@@ -16,6 +16,10 @@ type ActionItem = {
   run: () => void;
 };
 
+type Entry =
+  | { kind: "action"; item: ActionItem }
+  | { kind: "person"; item: Person };
+
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -121,13 +125,27 @@ export function CommandPalette() {
       window.removeEventListener("keydown", onKey, { capture: true });
   }, []);
 
-  const runItem = (entry: (typeof flatItems)[number]) => {
+  function runEntry(entry: Entry) {
+  if (entry.kind === "action") {
+    entry.item.run();
+    setOpen(false);
+  } else {
+    // Person
+    addToast({
+      variant: "success",
+      title: `Selected ${entry.item.name}`,
+      description: entry.item.email,
+    });
+  }
+}
+
+  const runItem = (entry: CommandEntry) => {
     if (entry.kind === "action") {
       if (entry.item.id === "toggle-theme") {
         entry.item.run();
         // اینجا setOpen(false) اجرا نمی‌شود چون در شرط نیست
       } else {
-        //entry.item.run();
+        // entry.item.run();
         setOpen(false); // فقط برای اکشن‌های دیگر بسته شود
       }
     } else {
