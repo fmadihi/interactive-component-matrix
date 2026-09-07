@@ -95,6 +95,14 @@ interactive-component-matrix/
 └── vite.config.ts
 ```
 
+---
+
+## ⚒️ Development Notes
+
+> **AI-Assisted Development:** This project was developed with the assistance of AI coding tools for faster prototyping and edge-case generation. All core logic, state management, accessibility decisions, and performance optimizations were reviewed and refined by the developer.
+
+---
+
 ### 👩‍💻 Author
 **Fatemeh Madihi** — Frontend Developer
 
