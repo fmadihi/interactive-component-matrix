@@ -110,5 +110,3 @@ interactive-component-matrix/
 - **Website:** [fatemehmadihi.ir](https://www.fatemehmadihi.ir)
 - **GitHub:** [@fmadihi](https://github.com/fmadihi)
 - **LinkedIn:** [Fatemeh Madihi](https://www.linkedin.com/in/fatemeh-madihi/)
-
-- 
