@@ -16,7 +16,7 @@
 </div>
 
 <p align="center">
-  <img src="./pic01.PNG" alt="Interactive Component Matrix Screenshot" width="750px" />
+  <img src="./pic01.PNG" alt="Interactive Component Matrix Screenshot" width="100%" />
 </p>
 
 ---
