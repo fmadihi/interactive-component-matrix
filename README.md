@@ -103,7 +103,7 @@ interactive-component-matrix/
 
 ---
 
-### 👩‍💻 Author
+## 👩‍💻 Author
 
 **Fatemeh Madihi** — Frontend Developer
 
