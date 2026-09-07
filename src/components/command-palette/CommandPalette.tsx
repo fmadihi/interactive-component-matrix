@@ -20,6 +20,11 @@ type Entry =
   | { kind: "action"; item: ActionItem }
   | { kind: "person"; item: Person };
 
+  type CommandEntry =
+  | { kind: "action"; item: ActionItem }
+  | { kind: "person"; item: Person };
+
+
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -90,14 +95,13 @@ export function CommandPalette() {
     );
   }, [debouncedQuery]);
 
-  const flatItems: { kind: "action" | "person"; item: ActionItem | Person }[] =
-    useMemo(
-      () => [
-        ...filteredActions.map((a) => ({ kind: "action" as const, item: a })),
-        ...results.map((p) => ({ kind: "person" as const, item: p })),
-      ],
-      [filteredActions, results],
-    );
+const flatItems: CommandEntry[] = useMemo(() => {
+  return [
+    ...filteredActions.map((item) => ({ kind: "action" as const, item })),
+    ...results.map((item) => ({ kind: "person" as const, item })),
+  ];
+}, [filteredActions, results]);
+
 
   useEffect(() => setActiveIndex(0), [debouncedQuery]);
 
@@ -107,7 +111,6 @@ export function CommandPalette() {
       setActiveIndex(0);
     }
   }, [open]);
-
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -125,39 +128,41 @@ export function CommandPalette() {
       window.removeEventListener("keydown", onKey, { capture: true });
   }, []);
 
-  function runEntry(entry: Entry) {
+  // const runItem = (entry: CommandEntry) => {
+  //   if (entry.kind === "action") {
+  //     if (entry.item.id === "toggle-theme") {
+  //       entry.item.run();
+  //       // اینجا setOpen(false) اجرا نمی‌شود چون در شرط نیست
+  //     } else {
+  //       // entry.item.run();
+  //       setOpen(false); // فقط برای اکشن‌های دیگر بسته شود
+  //     }
+  //   } else {
+  //     const p = entry.item;
+  //     addToast({
+  //       variant: "success",
+  //       title: `Selected ${p.name} — ${p.role}`,
+  //       description: p.email,
+  //     });
+  //   }
+  //   setOpen(false);
+  // };
+const runItem = (entry: CommandEntry) => {
   if (entry.kind === "action") {
     entry.item.run();
-    setOpen(false);
+    if (entry.item.id !== "toggle-theme") {
+      setOpen(false);
+    }
   } else {
-    // Person
+    const p = entry.item;
     addToast({
       variant: "success",
-      title: `Selected ${entry.item.name}`,
-      description: entry.item.email,
+      title: `Selected ${p.name} — ${p.role}`,
+      description: p.email,
     });
-  }
-}
-
-  const runItem = (entry: CommandEntry) => {
-    if (entry.kind === "action") {
-      if (entry.item.id === "toggle-theme") {
-        entry.item.run();
-        // اینجا setOpen(false) اجرا نمی‌شود چون در شرط نیست
-      } else {
-        // entry.item.run();
-        setOpen(false); // فقط برای اکشن‌های دیگر بسته شود
-      }
-    } else {
-      const p = entry.item;
-      addToast({
-        variant: "success",
-        title: `Selected ${p.name} — ${p.role}`,
-        description: p.email,
-      });
-    }
     setOpen(false);
-  };
+  }
+};
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const count = flatItems.length;
