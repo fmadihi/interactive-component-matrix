@@ -16,10 +16,6 @@ type ActionItem = {
   run: () => void;
 };
 
-type Entry =
-  | { kind: "action"; item: ActionItem }
-  | { kind: "person"; item: Person };
-
   type CommandEntry =
   | { kind: "action"; item: ActionItem }
   | { kind: "person"; item: Person };
