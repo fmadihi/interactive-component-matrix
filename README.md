@@ -107,6 +107,5 @@ interactive-component-matrix/
 
 **Fatemeh Madihi** — Frontend Developer
 
-- **Website:** [fatemehmadihi.ir](https://www.fatemehmadihi.ir)
 - **GitHub:** [@fmadihi](https://github.com/fmadihi)
 - **LinkedIn:** [Fatemeh Madihi](https://www.linkedin.com/in/fatemeh-madihi/)
